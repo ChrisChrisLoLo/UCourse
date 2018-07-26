@@ -1,0 +1,5 @@
+TO BE DELETED IN PRODUCTION!!!
+
+username: admin
+emailAddress: admin@email.com
+password: adminpassword
