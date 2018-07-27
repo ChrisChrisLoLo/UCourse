@@ -1,0 +1,14 @@
+{% extends "layout/base.html" %}
+{% block title %}{{course.name}}{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{{subject.letter_code}}{{course.number_code}}
+{{course.name}}
+{{subject.name}}
+{{course.description}}
+{% endblock %}

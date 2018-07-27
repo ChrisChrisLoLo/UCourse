@@ -1,0 +1,4 @@
+Have Django and Python3 installed
+Run python3 manage.py migrate
+Run python3 manage.py import_course_csv
+Run python3 manage.py runserver
