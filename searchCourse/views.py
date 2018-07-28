@@ -26,13 +26,11 @@ def index(request):
                     number_code__lte = int(request.GET["courseMax"]),
                     )
 
-    
-
 
     if request.GET["subject"] != "all":
-        search_subject = Subject.objects.get(letter_code= request.GET["subject"])
+        #search_subject = Subject.objects.get(letter_code= request.GET["subject"])
         search_courses = search_courses.filter(
-                        subject = search_subject.id
+                        subject__letter_code = request.GET["subject"]
                         )
     
 
