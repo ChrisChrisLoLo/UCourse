@@ -1,0 +1,4 @@
+{
+    "python.jediEnabled": false,
+    "python.pythonPath": "/usr/bin/python3.5"
+}

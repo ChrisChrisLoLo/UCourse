@@ -14,7 +14,7 @@ class Subject(models.Model):
     name = models.CharField(max_length=120)
     letter_code = models.CharField(max_length=6)
     def __str__(self):
-        return self.letter_code+' - '+self.name
+        return self.letter_code+" - "+self.name
         
 class Course(models.Model):
     subject = models.ForeignKey(
