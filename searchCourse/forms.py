@@ -2,7 +2,7 @@ from django import forms
 from django.forms import widgets
 from searchCourse.models import *
 
-SORT_CHOICES = (("name","Name"),("balanced","Balanced Score"))
+SORT_CHOICES = (("name","Name"),("balanced","Balanced Score"),("difficulty","Difficulty Score"),("workload","Workload Score"),("practicality","Practicality Score"),("enjoyment","Enjoyment Score"),("weighted","Weighted Score"))
 ASC_CHOICES = (("descending","Descending"),("ascending","Ascending"))
 SUBJECT_CHOICES = [("all","All Subjects")]
 subject_list = Subject.objects.order_by("letter_code")

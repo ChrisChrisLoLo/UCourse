@@ -2,49 +2,43 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from searchCourse.models import *
 from .forms import CourseForm
-DEF_SEARCH_PARAMS = {}
+DEF_SEARCH_PARAMS = {"sortBy":"name","order":"descending","subject":"all","courseMin":100,"courseMax":999}
 
 def index(request):
-    # print(request.GET)
     subject_list = Subject.objects.order_by("letter_code")
     course_list = Course.objects.order_by("name")[:20]
-    #ASSUME GET PARAMS ALWAYS FULL
-    if not request.GET:
-        form = CourseForm()
-        context = {"subject_list":subject_list,
-                "course_list":course_list,
-                "form":form}
-        return render(request,"searchCourse/index.html",context)
 
-    form = CourseForm(request.GET)
-    print("EWUHAIFDSAB~HSF")
-    print(form)
+    if request.GET:
+        search_params = request.GET
+    else:
+        search_params = DEF_SEARCH_PARAMS
+
+    form = CourseForm(search_params)
+
+    #NEED TO IMPLEMENT ERROR HANDLING
     if form.is_valid():
         pass
-    if request.GET["order"] == "descending":
-        asc_char = "-"
-    elif request.GET["order"] == "ascending":
-        asc_char = ""
-    #THROW ERROR OTHERWISE
 
-    search_courses = Course.objects.order_by(asc_char+request.GET["sortBy"])
+    if search_params["order"] == "descending":
+        asc_char = "-"
+    elif search_params["order"] == "ascending":
+        asc_char = ""
+
+    search_courses = Course.objects.order_by(asc_char+search_params["sortBy"])
     search_courses = search_courses.filter(
-                    number_code__gte = int(request.GET["courseMin"]),
-                    number_code__lte = int(request.GET["courseMax"]),
+                    number_code__gte = int(search_params["courseMin"]),
+                    number_code__lte = int(search_params["courseMax"]),
                     )
 
 
-    if request.GET["subject"] != "all":
-        #search_subject = Subject.objects.get(letter_code= request.GET["subject"])
+    if search_params["subject"] != "all":
         search_courses = search_courses.filter(
-                        subject__letter_code = request.GET["subject"]
+                        subject__letter_code = search_params["subject"]
                         )
     
 
     search_courses = search_courses[:20]
 
-    # print(search_courses)
-    
     context = {"subject_list":subject_list,
                 "course_list":course_list,
                 "search_list":search_courses,
