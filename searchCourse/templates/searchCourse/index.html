@@ -1,7 +1,7 @@
 {% extends "layout/base.html" %}
 {% block title %}Index{% endblock %}
 {% load static %}
-
+{% load bootstrap4 %}
 {% block head %}
 {% endblock %}
 
@@ -33,69 +33,32 @@
                 <div class="card-body">
                     <!--Make form collapsible with bootstrap collapse-->
                     <h3>Search for courses based on criterion</h3>
-                    <!--
-                    Add minimum X score?
-                    -->
-                    <form method="GET">
-                        <div class="form-row">
-                            <div class="col">
-                                <label for="inputSort">Sort courses by</label>
 
-                                <select class="form-control"name="score">
-                                    <option value="name">Name</option>
-                                    <option value="balanced">Balanced Score</option>
-                                    <option value="difficulty">Difficulty Score</option>
-                                    <option value="workload">Workload Score</option>
-                                    <option value="practicality">Practicality Score</option>
-                                    <option value="enjoyment">Enjoyment Score</option>
-                                    <option value="weighted">Weighted Score</option>
-                                </select>
-                                <select class="form-control" name="scoreOrder">
-                                    <option value="descending">Descending</option>
-                                    <option value="ascending">Ascending</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col">
-                                <label for="inputFacultyFilter">Filter by course subject (You can type the subject code or scroll through)</label>
-                                <select class="form-control" name="subject">
-                                    <option value="all">All Subjects</option>
-                                    <!--JINJA FOR LOOP-->
-                                    {% for subject in subject_list %}
-                                        <option value={{subject.letter_code}}>{{subject.letter_code}} - {{subject.name}}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="col">
-                                <label for="courseNumMin">Search for a Course Number between </label>
-                                <input  class="form-control" type="number" name="courseMin" value="100" min="100" max="999"required>
-                                up to and including
-                                <input  class="form-control" type="number" name="courseMax" value="999" min="100" max="999"required>
-                            </div>
-                        </div>
-                        <input class="btn btn-primary" type="submit" value="Search">
-                        
+                    <form action="/search" method="get" class="form">
+                        {% csrf_token %}
+
+                        {% bootstrap_form form %}
+                        {% buttons %}
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        {% endbuttons %}
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-sm-9 ">
+        <div class="col-sm-9">
             {% for course in search_list %}
 
-                        <div class="card">
-                            <h5 class="card-header">{{course.subject.letter_code}} {{course.number_code}}</h5>
-                            <div class="card-body">
-                                <h5 class="card-title">{{course.name}}</h5>
-                                <p class="card-text">{{course.description}}</p>
-                                <a href="/search/{{course.subject.letter_code}}/{{course.number_code}}" class="btn btn-primary">Details</a>
-                            </div>
-                        </div>
+                <div class="card">
+                    <h5 class="card-header">{{course.subject.letter_code}} {{course.number_code}}</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">{{course.name}}</h5>
+                        <p class="card-text">{{course.description}}</p>
+                        <a href="/search/{{course.subject.letter_code}}/{{course.number_code}}" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
 
             {% endfor %}
+
         </div>
     </div>
 </div>

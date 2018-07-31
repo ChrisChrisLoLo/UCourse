@@ -1,26 +1,33 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from searchCourse.models import *
-
+from .forms import CourseForm
 DEF_SEARCH_PARAMS = {}
 
 def index(request):
-    print(request.GET)
+    # print(request.GET)
     subject_list = Subject.objects.order_by("letter_code")
     course_list = Course.objects.order_by("name")[:20]
     #ASSUME GET PARAMS ALWAYS FULL
     if not request.GET:
+        form = CourseForm()
         context = {"subject_list":subject_list,
-                "course_list":course_list}
+                "course_list":course_list,
+                "form":form}
         return render(request,"searchCourse/index.html",context)
 
-    if request.GET["scoreOrder"] == "descending":
+    form = CourseForm(request.GET)
+    print("EWUHAIFDSAB~HSF")
+    print(form)
+    if form.is_valid():
+        pass
+    if request.GET["order"] == "descending":
         asc_char = "-"
-    elif request.GET["scoreOrder"] == "ascending":
+    elif request.GET["order"] == "ascending":
         asc_char = ""
     #THROW ERROR OTHERWISE
 
-    search_courses = Course.objects.order_by(asc_char+request.GET["score"])
+    search_courses = Course.objects.order_by(asc_char+request.GET["sortBy"])
     search_courses = search_courses.filter(
                     number_code__gte = int(request.GET["courseMin"]),
                     number_code__lte = int(request.GET["courseMax"]),
@@ -36,11 +43,12 @@ def index(request):
 
     search_courses = search_courses[:20]
 
-    print(search_courses)
-
+    # print(search_courses)
+    
     context = {"subject_list":subject_list,
                 "course_list":course_list,
                 "search_list":search_courses,
+                "form":form,
             }
     return render(request,"searchCourse/index.html",context)
 
