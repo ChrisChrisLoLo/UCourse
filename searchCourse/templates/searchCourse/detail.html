@@ -7,8 +7,8 @@
 {% block content %}
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-{{subject.letter_code}}{{course.number_code}}
-{{course.name}}
-{{subject.name}}
-{{course.description}}
+<h2>{{subject.letter_code}} {{course.number_code}}</h2>
+<h3>{{course.name}}</h3>
+<h4>{{subject.name}}</h4>
+<p>{{course.description}}</p>
 {% endblock %}

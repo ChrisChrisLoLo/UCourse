@@ -2,6 +2,7 @@
 {% block title %}Index{% endblock %}
 {% load static %}
 {% load bootstrap4 %}
+
 {% block head %}
 {% endblock %}
 
@@ -21,9 +22,9 @@
             <div class="card">
                 <div class="card-body">
                     <h3>Find a specific course:</h3>
-                    <form class="form-inline" id="singleSearchForm">
+                    <form class="form-group" id="singleSearchForm">
                         <input class="form-control" id="singleSubject" type="text" name="subjectName" placeholder="CRS" required>
-                        <input  class="form-control" id="singleCourse" type="number" name="courseNum" placeholder="101" min="100" max="999"required>
+                        <input class="form-control" id="singleCourse" type="number" name="courseNum" placeholder="101" min="100" max="999"required>
                         <input class="btn btn-primary" type="submit" onsubmit="searchSingle()" value="Search">
                     </form>
                 </div>
@@ -47,7 +48,6 @@
         </div>
         <div class="col-sm-9">
             {% for course in search_list %}
-
                 <div class="card">
                     <h5 class="card-header">{{course.subject.letter_code}} {{course.number_code}}</h5>
                     <div class="card-body">
@@ -56,9 +56,7 @@
                         <a href="/search/{{course.subject.letter_code}}/{{course.number_code}}" class="btn btn-primary">Details</a>
                     </div>
                 </div>
-
             {% endfor %}
-
         </div>
     </div>
 </div>
