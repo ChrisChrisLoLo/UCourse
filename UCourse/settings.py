@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'bootstrap4',
+    'index.apps.IndexConfig',
     'searchCourse.apps.SearchcourseConfig',
     'django.contrib.admin',
     'django.contrib.auth',
