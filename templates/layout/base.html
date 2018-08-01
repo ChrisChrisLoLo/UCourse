@@ -1,14 +1,18 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/minty/bootstrap.min.css" />
+    {% comment %} Reminder that non-minified css is used so I can customize it at some point.
+    Change to min at somepoint before prod {% endcomment %}
+    <link rel="stylesheet" href="{% static "css/bootstrap4cosmo.css" %}" />
     <title>{% block title %}{% endblock %} - My Webpage</title>
     {% block head %}
     {% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="/">UCourse</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
