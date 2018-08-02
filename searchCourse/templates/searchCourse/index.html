@@ -3,6 +3,8 @@
 {% load static %}
 {% load bootstrap4 %}
 
+{% load searchCourseExtras %}
+
 {% block head %}
 {% endblock %}
 
@@ -36,7 +38,7 @@
                     <h3>Search for courses based on criterion</h3>
 
                     <form action="/search" method="get" class="form">
-                        {% csrf_token %}
+                        <!-- Don't need for GET, I think {% csrf_token %} -->
 
                         {% bootstrap_form form %}
                         {% buttons %}
@@ -49,14 +51,24 @@
         <div class="col-sm-9">
             {% for course in search_list %}
                 <div class="card">
-                    <h5 class="card-header">{{course.subject.letter_code}} {{course.number_code}}</h5>
+                    <h4 class="card-header">{{course.subject.letter_code}} {{course.number_code}}</h4>
                     <div class="card-body">
-                        <h5 class="card-title">{{course.name}}</h5>
+                        <h4 class="card-title">{{course.name}}</h4>
                         <p class="card-text">{{course.description}}</p>
                         <a href="/search/{{course.subject.letter_code}}/{{course.number_code}}" class="btn btn-primary">Details</a>
                     </div>
                 </div>
             {% endfor %}
+            <nav>
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="?{% url_replace page=1%}">&laquo;</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>

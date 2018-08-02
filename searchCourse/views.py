@@ -1,12 +1,14 @@
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render
 from django.http import HttpResponse
+
 from searchCourse.models import *
 from .forms import CourseForm
 DEF_SEARCH_PARAMS = {"sortBy":"name","order":"descending","subject":"all","courseMin":100,"courseMax":999}
 
 def index(request):
     subject_list = Subject.objects.order_by("letter_code")
-    course_list = Course.objects.order_by("name")[:20]
+    course_list = Course.objects.order_by("name")
 
     if request.GET:
         search_params = request.GET
@@ -30,18 +32,19 @@ def index(request):
                     number_code__lte = int(search_params["courseMax"]),
                     )
 
-
     if search_params["subject"] != "all":
         search_courses = search_courses.filter(
                         subject__letter_code = search_params["subject"]
                         )
     
 
-    search_courses = search_courses[:20]
+    search_paginator = Paginator(search_courses,15)
+    page = request.GET.get("page")
+    found_courses = search_paginator.get_page(page)
 
     context = {"subject_list":subject_list,
                 "course_list":course_list,
-                "search_list":search_courses,
+                "search_list":found_courses,
                 "form":form,
             }
     return render(request,"searchCourse/index.html",context)
