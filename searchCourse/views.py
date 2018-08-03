@@ -7,19 +7,30 @@ from .forms import CourseForm
 DEF_SEARCH_PARAMS = {"sortBy":"name","order":"descending","subject":"all","courseMin":100,"courseMax":999}
 
 def index(request):
+    
+    #Cannot find a way to get initial field values from forms.py
+    #Using DEF_SEARCH_PARAMS works but violates DRY,
+    #need to find a way to work around it.
+
+    form = CourseForm(DEF_SEARCH_PARAMS)
+    search_params = form.data
+
     subject_list = Subject.objects.order_by("letter_code")
     course_list = Course.objects.order_by("name")
 
     if request.GET:
-        search_params = request.GET
-    else:
-        search_params = DEF_SEARCH_PARAMS
+        get_form = CourseForm(request.GET)
+        if get_form.is_valid():
+            form = get_form
+            search_params = form.cleaned_data
+        # else:
+        #     form = CourseForm()
+        #     print(form.initial)
+        #     search_params = form.data
+    # else:
+    #     form = CourseForm()
+    #     search_params = form.cleaned_data
 
-    form = CourseForm(search_params)
-
-    #NEED TO IMPLEMENT ERROR HANDLING
-    if form.is_valid():
-        pass
 
     if search_params["order"] == "descending":
         asc_char = "-"
