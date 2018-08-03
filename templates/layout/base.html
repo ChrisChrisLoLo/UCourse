@@ -6,8 +6,9 @@
     <meta charset="UTF-8">
     {% comment %} Reminder that non-minified css is used so I can customize it at some point.
     Change to min at somepoint before prod {% endcomment %}
+    <link rel="shortcut icon" type="image/png" href="{% static "favicon.ico" %}"/>
     <link rel="stylesheet" href="{% static "css/bootstrap4cosmo.css" %}" />
-    <title>{% block title %}{% endblock %} - My Webpage</title>
+    <title>{% block title %}{% endblock %} - Ucourse</title>
     {% block head %}
     {% endblock %}
 </head>

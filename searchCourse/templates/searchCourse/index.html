@@ -1,5 +1,5 @@
 {% extends "layout/base.html" %}
-{% block title %}Index{% endblock %}
+{% block title %}Search{% endblock %}
 {% load static %}
 {% load bootstrap4 %}
 
@@ -62,6 +62,8 @@
             <nav>
                 <ul class="pagination">
                     {% if search_list.has_previous %}
+                        {# href attributes use a custom url_replace template tag since I want the page attribute to be appended to the #}
+                        {# current GET values, not for it to replace all other GET values #}
                         <li class="page-item"><a class="page-link" href="?{% url_replace page="1" %}">&laquo;</a></li>
                         <li class="page-item"><a class="page-link" href="?{% url_replace page=search_list.previous_page_number %}">Previous</a></li>
                     {% endif %}
