@@ -27,7 +27,7 @@
                     <a class="nav-link {% if request.resolver_match.app_name == "courseSearch" %} active {% endif %}" href="/search"> Search </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.app_name == "login" %} active {% endif %}" href="/login"> Login </a>
+                    <a class="nav-link {% if request.resolver_match.app_name == "" %} active {% endif %}" href="/accounts/login"> Login </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Disabled</a>
