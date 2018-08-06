@@ -9,6 +9,9 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
+
+{# This template can be simplified by having the forms as a parent template. Should do this once UX is finalized #}
+
 <div class="container-fluid">
 
     <div class="row">
@@ -33,10 +36,7 @@
                 <div class="card-body">
                     <!--Make form collapsible with bootstrap collapse-->
                     <h3>Search for courses based on criterion</h3>
-
                     <form action="/search" method="get" class="form">
-                        <!-- Don't need for GET, I think {% csrf_token %} -->
-
                         {% bootstrap_form form %}
                         {% buttons %}
                             <button type="submit" class="btn btn-primary">Submit</button>

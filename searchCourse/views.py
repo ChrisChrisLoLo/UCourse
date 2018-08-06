@@ -71,4 +71,7 @@ def detail(request, subject_id, course_id):
     #return HttpResponse("You're looking at course {} {}.".format(subject_id,course_id))
 
 def rate(request, subject_id, course_id):
-    return HttpResponse("You're rating the course {} {}.".format(subject_id,course_id))
+    
+    form = 1
+    context = {"form":form,}
+    return render(request,"accounts/sign_up.html",context)

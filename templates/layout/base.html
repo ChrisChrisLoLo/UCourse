@@ -27,10 +27,21 @@
                     <a class="nav-link {% if request.resolver_match.app_name == "courseSearch" %} active {% endif %}" href="/search"> Search </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.app_name == "" %} active {% endif %}" href="/accounts/login"> Login </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <a class="nav-link active" href="/accounts/login"> Login </a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Username
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Account</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
                 </li>
             </ul>
         </div>
