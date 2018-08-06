@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from searchCourse.models import *
-from .forms import CourseForm
+from .forms import CourseForm, RatingForm
 DEF_SEARCH_PARAMS = {"sortBy":"name","order":"descending","subject":"all","courseMin":100,"courseMax":999}
 
 def index(request):
@@ -71,7 +71,17 @@ def detail(request, subject_id, course_id):
     #return HttpResponse("You're looking at course {} {}.".format(subject_id,course_id))
 
 def rate(request, subject_id, course_id):
-    
-    form = 1
+    if request.method == "POST":
+        form = RatingForm(request.POST)
+        # if form.is_valid():
+        #     form.save()
+        #     username = form.cleaned_data.get("username")
+        #     raw_password = form.cleaned_data.get("password1")
+        #     user = authenticate(username=username, password=raw_password)
+        #     login(request, user)
+        #     return redirect("/")
+    else:
+        form = RatingForm()
+
     context = {"form":form,}
     return render(request,"accounts/sign_up.html",context)

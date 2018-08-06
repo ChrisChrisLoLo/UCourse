@@ -65,4 +65,13 @@ class Rating(models.Model):
             MinValueValidator(1)
         ]
     )
-    comment = models.CharField(max_length=400, blank=True, default='')
+    comment = models.CharField(max_length=400, blank=True, null=True)
+    gpa = models.DecimalField(
+        max_digits=2,
+        decimal_places=1,
+        validators=[
+            MaxValueValidator(4),
+            MinValueValidator(0)
+        ],
+        null=True
+    )

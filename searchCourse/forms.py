@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import widgets
+from django.forms import widgets, ModelForm
 from searchCourse.models import *
 
 SORT_CHOICES = (("name","Name"),("balanced","Balanced Score"),("difficulty","Difficulty Score"),("workload","Workload Score"),("practicality","Practicality Score"),("enjoyment","Enjoyment Score"),("weighted","Weighted Score"))
@@ -18,4 +18,18 @@ class CourseForm(forms.Form):
     courseMin = forms.IntegerField(label="Minimum Course Number",min_value=100,max_value=999,required=True,initial=100)
     courseMax = forms.IntegerField(label="Maximum Course Number",min_value=100,max_value=999,required=True,initial=999)
 
-#class RateForm(form.Form):
+class RatingForm(forms.Form):
+    diffScore = forms.IntegerField(label="How easy was the course?",min_value=1,max_value=5,required=True,initial=0)
+    workScore = forms.IntegerField(label="How nice was the workload for the course?",min_value=1,max_value=5,required=True,initial=0)
+    pracScore = forms.IntegerField(label="How practical was the course?",min_value=1,max_value=5,required=True,initial=0)
+    enjoyScore = forms.IntegerField(label="How enjoyable was the course?",min_value=1,max_value=5,required=True,initial=0)
+    comment = forms.CharField(label="Additional comments (Optional)",widget=forms.Textarea,max_length=400,required=False)
+    gpa = forms.DecimalField(label="Average class GPA (Optional)",min_value=0,max_value=4,required=False)
+
+# Optional way of implementing a form, however the rate form is not cut and dry enough to conveniently
+# use a ModelForm
+
+# class RateForm(ModelForm):
+#     class Meta:
+#         model = Rating
+#         fields = ["difficulty_score","workload_score","practicality_score","enjoyment_score"]
