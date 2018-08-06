@@ -59,6 +59,11 @@ def detail(request, subject_id, course_id):
     select_subject = Subject.objects.get(letter_code=subject_id)
     select_course = Course.objects.get(number_code=course_id,subject=select_subject.id)
     #print(select_course)
+
+    form = CourseForm(request.GET)
+    if not form.is_valid():
+        form = CourseForm(DEF_SEARCH_PARAMS)
+        
     context = {"course":select_course,
                 "subject":select_subject,
                 "form":form}
