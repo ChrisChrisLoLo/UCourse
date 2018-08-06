@@ -24,10 +24,7 @@ class RatingForm(forms.Form):
     pracScore = forms.IntegerField(label="How practical was the course?",min_value=1,max_value=5,required=True,initial=0)
     enjoyScore = forms.IntegerField(label="How enjoyable was the course?",min_value=1,max_value=5,required=True,initial=0)
     comment = forms.CharField(label="Additional comments (Optional)",widget=forms.Textarea,max_length=400,required=False)
-    gpa = forms.DecimalField(label="Average class GPA (Optional)",min_value=0,max_value=4,required=False)
-
-# Optional way of implementing a form, however the rate form is not cut and dry enough to conveniently
-# use a ModelForm
+    #gpa = forms.DecimalField(label="Average class GPA (Optional)",min_value=0,max_value=4,required=False)
 
 # class RateForm(ModelForm):
 #     class Meta:

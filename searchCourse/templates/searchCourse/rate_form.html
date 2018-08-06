@@ -1,0 +1,35 @@
+{% extends "layout/base.html" %}
+{% block title %}Sign up{% endblock %}
+{% load static %}
+{% load bootstrap4 %}
+{% block head %}
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <div class="card text-center">
+                <div class="card-title bg-primary">
+                    <h2 class="text-white">Submit a rating for {{subject_id}} {{course_id}}</h2>
+                </div>
+                <div class="card-body">
+                    <h3>When rating, remember that a 5 is ideal, while a 1 is living hell</h3>
+                    <form method="post" class="form">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        {% buttons %}
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        {% endbuttons %}
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+{% endblock %} 

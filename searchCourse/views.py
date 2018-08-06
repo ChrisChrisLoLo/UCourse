@@ -83,5 +83,7 @@ def rate(request, subject_id, course_id):
     else:
         form = RatingForm()
 
-    context = {"form":form,}
-    return render(request,"accounts/sign_up.html",context)
+    context = {"form":form,
+                "course_id":course_id,
+                "subejct_id":subject_id}
+    return render(request,"searchCourse/rate_form.html",context)

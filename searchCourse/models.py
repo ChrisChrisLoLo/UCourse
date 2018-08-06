@@ -66,12 +66,13 @@ class Rating(models.Model):
         ]
     )
     comment = models.CharField(max_length=400, blank=True, null=True)
-    gpa = models.DecimalField(
-        max_digits=2,
-        decimal_places=1,
-        validators=[
-            MaxValueValidator(4),
-            MinValueValidator(0)
-        ],
-        null=True
-    )
+    # Not adding gpa into courses since gpa relates to course sections, and should be modeled as such
+    # gpa = models.DecimalField(
+    #     max_digits=2,
+    #     decimal_places=1,
+    #     validators=[
+    #         MaxValueValidator(4),
+    #         MinValueValidator(0)
+    #     ],
+    #     null=True
+    # )
