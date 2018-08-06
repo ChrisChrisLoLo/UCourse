@@ -1,0 +1,22 @@
+{% extends "layout/base.html" %}
+{% block title %}Logged Out{% endblock %}
+{% load static %}
+{% load bootstrap4 %}
+{% block head %}
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <p>ur logged out</p>
+            <a href={{redirect_field_name}}></a>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+{% endblock %} 

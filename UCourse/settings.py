@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'index.apps.IndexConfig',
     'searchCourse.apps.SearchcourseConfig',
+    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
