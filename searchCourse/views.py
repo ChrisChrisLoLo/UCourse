@@ -15,22 +15,14 @@ def index(request):
     form = CourseForm(DEF_SEARCH_PARAMS)
     search_params = form.data
 
-    subject_list = Subject.objects.order_by("letter_code")
-    course_list = Course.objects.order_by("name")
+    #subject_list = Subject.objects.order_by("letter_code")
+    #course_list = Course.objects.order_by("name")
 
     if request.GET:
         get_form = CourseForm(request.GET)
         if get_form.is_valid():
             form = get_form
             search_params = form.cleaned_data
-        # else:
-        #     form = CourseForm()
-        #     print(form.initial)
-        #     search_params = form.data
-    # else:
-    #     form = CourseForm()
-    #     search_params = form.cleaned_data
-
 
     if search_params["order"] == "descending":
         asc_char = "-"
@@ -53,8 +45,7 @@ def index(request):
     page = request.GET.get("page")
     found_courses = search_paginator.get_page(page)
 
-    context = {"subject_list":subject_list,
-                "course_list":course_list,
+    context = {
                 "search_list":found_courses,
                 "form":form,
             }
@@ -69,7 +60,8 @@ def detail(request, subject_id, course_id):
     select_course = Course.objects.get(number_code=course_id,subject=select_subject.id)
     #print(select_course)
     context = {"course":select_course,
-                "subject":select_subject}
+                "subject":select_subject,
+                "form":form}
     return render(request,"searchCourse/detail.html",context)
     #return HttpResponse("You're looking at course {} {}.".format(subject_id,course_id))
 
