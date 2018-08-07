@@ -1,6 +1,10 @@
 {% extends "layout/base.html" %}
 {% block title %}{{course.name}}{% endblock %}
 {% load bootstrap4 %}
+{% load static %}
+
+{% load searchCourseExtras %}
+
 
 {% block head %}
 {% endblock %}
@@ -62,4 +66,8 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static "searchCourse/js/search.js" %}"></script>
 {% endblock %}
