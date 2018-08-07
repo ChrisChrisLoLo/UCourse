@@ -1,5 +1,5 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 
 from searchCourse.models import *
@@ -82,7 +82,6 @@ def rate(request, subject_id, course_id):
             if select_course:
                 if not request.user.is_authenticated:
                     return redirect("/accounts/login")
-                user_id = request.user.id
                 diff_score = form.cleaned_data.get("diffScore")
                 work_score = form.cleaned_data.get("workScore")
                 prac_score = form.cleaned_data.get("pracScore")
@@ -91,8 +90,8 @@ def rate(request, subject_id, course_id):
                 #Create rating form or update it if user has already created one.
                 #Rating is the object updated or created, created is a boolean 
                 rating, was_created = Rating.objects.update_or_create(
-                    course = select_course.id,
-                    user = user_id,
+                    course = select_course,
+                    user = request.user,
                     defaults = {
                         "difficulty_score":diff_score,
                         "workload_score":work_score,
@@ -101,7 +100,7 @@ def rate(request, subject_id, course_id):
                         "comment":comment
                     }
                 )
-                return redirect("/")
+                return redirect("/search/success")
             else:
                 #Raise error indincating no course found
                 pass

@@ -7,3 +7,5 @@ from .models import Subject
 admin.site.register(Subject)
 from .models import Course
 admin.site.register(Course)
+from .models import Rating
+admin.site.register(Rating)
