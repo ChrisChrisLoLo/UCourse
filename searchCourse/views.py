@@ -79,17 +79,31 @@ def rate(request, subject_id, course_id):
             select_subject = Subject.objects.get(letter_code=subject_id)
             select_course = Course.objects.get(number_code=course_id,subject=select_subject.id)
 
-            if not request.user.is_authenticated:
-                return redirect("/accounts/login")
-
             if select_course:
-                username = form.cleaned_data.get("username")
-                raw_password = form.cleaned_data.get("password1")
-                user = authenticate(username=username, password=raw_password)
-                login(request, user)
+                if not request.user.is_authenticated:
+                    return redirect("/accounts/login")
+                user_id = request.user.id
+                diff_score = form.cleaned_data.get("diffScore")
+                work_score = form.cleaned_data.get("workScore")
+                prac_score = form.cleaned_data.get("pracScore")
+                enjoy_score = form.cleaned_data.get("enjoyScore")
+                comment = form.cleaned_data.get("comment")
+                #Create rating form or update it if user has already created one.
+                #Rating is the object updated or created, created is a boolean 
+                rating, was_created = Rating.objects.update_or_create(
+                    course = select_course.id,
+                    user = user_id,
+                    defaults = {
+                        "difficulty_score":diff_score,
+                        "workload_score":work_score,
+                        "practicality_score":prac_score,
+                        "enjoyment_score":enjoy_score,
+                        "comment":comment
+                    }
+                )
                 return redirect("/")
             else:
-                #Raise error
+                #Raise error indincating no course found
                 pass
             
     else:
@@ -99,3 +113,7 @@ def rate(request, subject_id, course_id):
                 "course_id":course_id,
                 "subject_id":subject_id}
     return render(request,"searchCourse/rate_form.html",context)
+
+
+def success(request):
+    return render(request,"searchCourse/success.html")
