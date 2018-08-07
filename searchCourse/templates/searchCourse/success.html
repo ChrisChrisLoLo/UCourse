@@ -1,1 +1,29 @@
-YAY!!!!!
+{% extends "layout/base.html" %}
+{% block title %}Success!{% endblock %}
+{% load static %}
+{% load bootstrap4 %}
+{% block head %}
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <div class="card text-center">
+                <div class="card-title bg-success">
+                    <h2 class="text-white">Success!</h2>
+                </div>
+                <div class="card-body">
+                    <p>Your rating was successfully submitted! Thank you!</p>
+                    <a href="../search" class="btn btn-primary">Return to search</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+{% endblock %} 
