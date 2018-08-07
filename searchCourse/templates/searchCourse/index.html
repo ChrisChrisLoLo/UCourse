@@ -56,6 +56,7 @@
                         <h4 class="card-title">{{course.name}}</h4>
                         <p class="card-text">{{course.description}}</p>
                         <a href="/search/{{course.subject.letter_code}}/{{course.number_code}}" class="btn btn-primary">Details</a>
+                        <a href="/search/{{course.subject.letter_code}}/{{course.number_code}}/rate" class="btn btn-primary text-white">Rate this course</a>
                     </div>
                 </div>
             {% endfor %}

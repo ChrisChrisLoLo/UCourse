@@ -73,17 +73,29 @@ def detail(request, subject_id, course_id):
 def rate(request, subject_id, course_id):
     if request.method == "POST":
         form = RatingForm(request.POST)
-        # if form.is_valid():
-        #     form.save()
-        #     username = form.cleaned_data.get("username")
-        #     raw_password = form.cleaned_data.get("password1")
-        #     user = authenticate(username=username, password=raw_password)
-        #     login(request, user)
-        #     return redirect("/")
+        if form.is_valid():
+            #validate subject/course id
+            subject_id = subject_id.upper()
+            select_subject = Subject.objects.get(letter_code=subject_id)
+            select_course = Course.objects.get(number_code=course_id,subject=select_subject.id)
+
+            if not request.user.is_authenticated:
+                return redirect("/accounts/login")
+
+            if select_course:
+                username = form.cleaned_data.get("username")
+                raw_password = form.cleaned_data.get("password1")
+                user = authenticate(username=username, password=raw_password)
+                login(request, user)
+                return redirect("/")
+            else:
+                #Raise error
+                pass
+            
     else:
         form = RatingForm()
 
     context = {"form":form,
                 "course_id":course_id,
-                "subejct_id":subject_id}
+                "subject_id":subject_id}
     return render(request,"searchCourse/rate_form.html",context)
