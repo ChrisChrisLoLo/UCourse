@@ -102,7 +102,7 @@ def rate(request, subject_id, course_id):
                 )
                 return redirect("/search/success")
             else:
-                #Raise error indincating no course found
+                #Raise error indicating no course found
                 pass
             
     else:
