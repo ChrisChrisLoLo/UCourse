@@ -3,12 +3,12 @@
 {% with "difficulty workload practicality enjoyment" as criteria%}
 <div id="scores" class="d-flex">
     {% for criterion in criteria.split %}
-        <div class="p-2 card bg-light">
+        {% get_attribute course criterion as score%}
+        <div class="p-2 card {% set_color score %}">
             <h5 class="text-center">{{criterion|title}}</h5>
             {# Check if a score for a criterion exitsts, and display the score if so#}
-            {% get_attribute course criterion as criterion_has_rating%}
-            {% if criterion_has_rating %}
-                <p class="text-center">{% get_attribute course criterion%}/5</p>
+            {% if score %}
+                <p class="text-center">{{score}}/5</p>
             {% else %}
                 <p class="text-center">N/A</p>
             {% endif %}
