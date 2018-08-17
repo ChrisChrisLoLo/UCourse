@@ -67,9 +67,13 @@ def index(request):
 def detail(request, subject_id, course_id):
     subject_id = subject_id.upper()
     select_subject = Subject.objects.get(letter_code=subject_id)
-    select_course = Course.objects.get(number_code=course_id,subject=select_subject.id)
-    #print(select_course)
-
+    select_course = Course.objects  .annotate(difficulty=Avg("rating__difficulty_score"))\
+                                    .annotate(workload=Avg("rating__workload_score"))\
+                                    .annotate(practicality=Avg("rating__practicality_score"))\
+                                    .annotate(enjoyment=Avg("rating__enjoyment_score"))\
+                                    .get(number_code=course_id,subject=select_subject.id)\
+    
+    #Fills in form from previous page is possible
     form = CourseForm(request.GET)
     if not form.is_valid():
         form = CourseForm(DEF_SEARCH_PARAMS)
@@ -78,7 +82,6 @@ def detail(request, subject_id, course_id):
                 "subject":select_subject,
                 "form":form}
     return render(request,"searchCourse/detail.html",context)
-    #return HttpResponse("You're looking at course {} {}.".format(subject_id,course_id))
 
 def rate(request, subject_id, course_id):
     if request.user.is_authenticated:

@@ -26,8 +26,8 @@ def get_attribute(context, arg):
 def set_color(score):
     textBSColor = "text-light"
     if not score:
-        #if N/A
-        return textBSColor+" bg-secondary"
+        textBSColor = "text-dark"
+        return textBSColor+" bg-light"
     score = Decimal(score)
     if score <= 1.7:
         return textBSColor+" bg-danger"

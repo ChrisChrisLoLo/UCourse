@@ -56,10 +56,10 @@
                     <h2>{{subject.letter_code}} {{course.number_code}}</h2>
                     <h3>{{course.name}}</h3>
                     <h4>{{subject.name}}</h4>
-
                 </div>
                 <div class="card-body">
                     <p>{{course.description}}</p>
+                    {% include "searchCourse/course_rating_block.html"%}
                     <a class="btn btn-primary text-white" href="{{course.number_code}}/rate">Rate this course</a>
                 </div>
             </div>

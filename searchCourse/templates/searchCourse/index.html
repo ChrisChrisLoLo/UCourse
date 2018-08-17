@@ -54,16 +54,7 @@
                     <div class="card-body">
                         <h4 class="card-title">{{course.name}}</h4>
                         <p class="card-text">{{course.description|truncatewords:"75"}}</p>
-                        
                             {% include "searchCourse/course_rating_block.html"%}
-                            <!-- <div class="p-2">
-                                {% if course.difficulty %}
-                                    <p>difficulty: {{course.difficulty}}/5</p>
-                                {% else %}
-                                    <p>difficulty: N/A</p>
-                                {% endif %}
-                            </div> -->
-
                         <a href="/search/{{course.subject.letter_code}}/{{course.number_code}}" class="btn btn-primary">Details</a>
                         <a href="/search/{{course.subject.letter_code}}/{{course.number_code}}/rate" class="btn btn-primary text-white">Rate this course</a>
                     </div>
