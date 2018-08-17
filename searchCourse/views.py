@@ -5,7 +5,7 @@ from django.db.models import Avg
 
 from searchCourse.models import *
 from .forms import CourseForm, RatingForm
-DEF_SEARCH_PARAMS = {"sortBy":"name","order":"descending","subject":"all","courseMin":100,"courseMax":999}
+DEF_SEARCH_PARAMS = {"sortBy":"name","order":"descending","subject":"all","courseMin":100,"courseMax":1000}
 
 def index(request):
     
