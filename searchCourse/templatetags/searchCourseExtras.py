@@ -10,3 +10,7 @@ def url_replace(context, **kwargs):
     query = context['request'].GET.dict()
     query.update(kwargs)
     return urlencode(query)
+
+@register.simple_tag()
+def get_attribute(context, arg):
+    return getattr(context, arg)

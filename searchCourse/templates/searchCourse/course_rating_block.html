@@ -1,0 +1,17 @@
+{# This is a template used to show the ratings of a class #}
+{% load searchCourseExtras%}
+{% with "difficulty workload practicality enjoyment" as criteria%}
+<div id="scores" class="d-flex">
+    {% for criterion in criteria.split %}
+        <div class="p-2">
+            {# Check if a score for a criterion exitsts, and display the score if so#}
+            {% get_attribute course criterion as criterion_has_rating%}
+            {% if criterion_has_rating %}
+                <p>{{criterion}}: {% get_attribute course criterion %}/5</p>
+            {% else %}
+                <p>{{criterion}}: N/A</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% endwith %}

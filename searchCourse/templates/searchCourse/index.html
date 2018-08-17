@@ -38,8 +38,6 @@
                     <h3>Search for courses based on criterion</h3>
 
                     <form action="/search" method="get" class="form">
-                        <!-- Don't need for GET, I think {% csrf_token %} -->
-
                         {% bootstrap_form form %}
                         {% buttons %}
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -49,17 +47,29 @@
             </div>
         </div>
         <div class="col-sm-9">
+            {# CLASS CARD #}
             {% for course in search_list %}
                 <div class="card">
                     <h4 class="card-header">{{course.subject.letter_code}} {{course.number_code}}</h4>
                     <div class="card-body">
                         <h4 class="card-title">{{course.name}}</h4>
-                        <p class="card-text">{{course.description}}</p>
+                        <p class="card-text">{{course.description|truncatewords:"75"}}</p>
+                        
+                            {% include "searchCourse/course_rating_block.html"%}
+                            <!-- <div class="p-2">
+                                {% if course.difficulty %}
+                                    <p>difficulty: {{course.difficulty}}/5</p>
+                                {% else %}
+                                    <p>difficulty: N/A</p>
+                                {% endif %}
+                            </div> -->
+
                         <a href="/search/{{course.subject.letter_code}}/{{course.number_code}}" class="btn btn-primary">Details</a>
                         <a href="/search/{{course.subject.letter_code}}/{{course.number_code}}/rate" class="btn btn-primary text-white">Rate this course</a>
                     </div>
                 </div>
             {% endfor %}
+            {# PAGE NAV #}
             <nav>
                 <ul class="pagination">
                     {% if search_list.has_previous %}

@@ -62,6 +62,8 @@ def index(request):
 # def subject(request, subject_id):
 #     return HttpResponse("You're looking at subject {}.".format(subject_id))
 
+#TODO: MECE somehow lost the space when it went from the webpage to the csv. Need to make change to csv to fix this
+
 def detail(request, subject_id, course_id):
     subject_id = subject_id.upper()
     select_subject = Subject.objects.get(letter_code=subject_id)
