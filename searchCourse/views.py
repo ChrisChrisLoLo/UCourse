@@ -6,6 +6,7 @@ from django.db.models import Avg
 from searchCourse.models import *
 from .forms import CourseForm, RatingForm
 DEF_SEARCH_PARAMS = {"sortBy":"name","order":"descending","subject":"all","courseMin":100,"courseMax":1000}
+CRITERION_NUM = 4
 
 def index(request):
     
@@ -37,10 +38,13 @@ def index(request):
                         subject__letter_code = search_params["subject"]
                         )
 
+    #Query is unoptimized since it is finding each score twice rather than finding it once.
+    #I do not know how to work around this with Django's ORM.
     search_courses = search_courses.annotate(difficulty=Avg("rating__difficulty_score"))\
                                     .annotate(workload=Avg("rating__workload_score"))\
                                     .annotate(practicality=Avg("rating__practicality_score"))\
                                     .annotate(enjoyment=Avg("rating__enjoyment_score"))\
+                                    .annotate(balanced=((Avg("rating__difficulty_score")+Avg("rating__workload_score")+Avg("rating__practicality_score")+Avg("rating__enjoyment_score"))/CRITERION_NUM))\
                                     .order_by(asc_char+search_params["sortBy"])
     
     #search_courses = Course.objects.order_by(asc_char+search_params["sortBy"])
@@ -71,6 +75,7 @@ def detail(request, subject_id, course_id):
                                     .annotate(workload=Avg("rating__workload_score"))\
                                     .annotate(practicality=Avg("rating__practicality_score"))\
                                     .annotate(enjoyment=Avg("rating__enjoyment_score"))\
+                                    .annotate(balanced=((Avg("rating__difficulty_score")+Avg("rating__workload_score")+Avg("rating__practicality_score")+Avg("rating__enjoyment_score"))/CRITERION_NUM))\
                                     .get(number_code=course_id,subject=select_subject.id)\
     
     #Fills in form from previous page is possible
