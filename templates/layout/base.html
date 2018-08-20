@@ -26,10 +26,6 @@
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.app_name == "courseSearch" %} active {% endif %}" href="/search"> Search </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-
             </ul>
             <ul class="navbar-nav ml-auto">
                 {% if request.user.is_authenticated %}
@@ -38,7 +34,7 @@
                             {{request.user.username}}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Account</a>
+                            <a class="dropdown-item" href="/accounts/user">Account</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/accounts/logout">Logout</a>
                         </div>

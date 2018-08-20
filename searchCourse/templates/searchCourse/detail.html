@@ -18,7 +18,7 @@
 
 <div class="container-fluid">
 
-    <div class="row">
+    <div class="row ">
         <div class="col">
             <h1>Search</h1>
         </div>
@@ -71,7 +71,11 @@
                             <h3>Comments:</h3>
                             {% if ratings %}
                                 {% for rating in ratings %}
-                                    <h4>{{rating.username}}</h4>
+                                    {% if rating.username %}
+                                        <h4>{{rating.username}}</h4>
+                                    {% else %}{#If user has removed themselves#}
+                                        <h4>[removed]</h4>
+                                    {% endif %}
                                     <p>{{rating.comment}}</p>
                                 {% endfor %}
                             {% else %}

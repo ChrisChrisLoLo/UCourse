@@ -16,3 +16,7 @@ def sign_up(request):
         form = UserCreationForm()
     context = {"form":form,}
     return render(request,"accounts/sign_up.html",context)
+
+def user(request):
+    context = None
+    return render(request,"accounts/user.html",context)
