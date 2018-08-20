@@ -1,7 +1,7 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from django.db.models import Avg
+from django.db.models import Avg, F
 
 from searchCourse.models import *
 from .forms import CourseForm, RatingForm
@@ -71,13 +71,17 @@ def index(request):
 def detail(request, subject_id, course_id):
     subject_id = subject_id.upper()
     select_subject = Subject.objects.get(letter_code=subject_id)
+
     select_course = Course.objects  .annotate(difficulty=Avg("rating__difficulty_score"))\
                                     .annotate(workload=Avg("rating__workload_score"))\
                                     .annotate(practicality=Avg("rating__practicality_score"))\
                                     .annotate(enjoyment=Avg("rating__enjoyment_score"))\
                                     .annotate(balanced=((Avg("rating__difficulty_score")+Avg("rating__workload_score")+Avg("rating__practicality_score")+Avg("rating__enjoyment_score"))/CRITERION_NUM))\
                                     .get(number_code=course_id,subject=select_subject.id)\
-    
+
+    select_ratings = Rating.objects .annotate(username = F("user__username"))\
+                                    .filter(course=select_course)
+
     #Fills in form from previous page is possible
     form = CourseForm(request.GET)
     if not form.is_valid():
@@ -85,6 +89,7 @@ def detail(request, subject_id, course_id):
         
     context = {"course":select_course,
                 "subject":select_subject,
+                "ratings":select_ratings,
                 "form":form}
     return render(request,"searchCourse/detail.html",context)
 

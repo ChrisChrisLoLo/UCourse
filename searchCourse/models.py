@@ -33,7 +33,7 @@ class Course(models.Model):
 class Rating(models.Model):
     course = models.ForeignKey(
         Course,
-        null = True,
+        null = True,               #Can be null, but this should only be in the case where a course is destroyed.
         on_delete=models.SET_NULL, #Do not destroy user ratings in case of a hiccup.
     )
     user = models.ForeignKey(

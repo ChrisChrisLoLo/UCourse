@@ -58,9 +58,30 @@
                     <h4>{{subject.name}}</h4>
                 </div>
                 <div class="card-body">
-                    <p>{{course.description}}</p>
-                    {% include "searchCourse/course_rating_block.html"%}
-                    <a class="btn btn-primary text-white" href="{{course.number_code}}/rate">Rate this course</a>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <h3>Description:</h3>
+                            <p>{{course.description}}</p>
+                        </li>
+                        <li class="list-group-item">
+                            <h3>Scores:</h3>
+                            {% include "searchCourse/course_rating_block.html"%}
+                        </li>
+                        <li class="list-group-item">
+                            <h3>Comments:</h3>
+                            {% if ratings %}
+                                {% for rating in ratings %}
+                                    <h4>{{rating.username}}</h4>
+                                    <p>{{rating.comment}}</p>
+                                {% endfor %}
+                            {% else %}
+                                <p>No comments yet.</p>
+                            {% endif %}
+                        </li>
+                        <li class="list-group-item">
+                            <a class="btn btn-primary text-white" href="{{course.number_code}}/rate">Rate this course</a>
+                        </li>   
+                    </ul>
                 </div>
             </div>
         </div>
