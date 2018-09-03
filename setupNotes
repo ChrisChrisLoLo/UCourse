@@ -1,4 +1,7 @@
 Use pipenv to install all required packages.
+Comment out all lines of code in searchCourse/views.py. This is to allow for migration
+without crashing.
 Run python3 manage.py migrate
 Run python3 manage.py import_course_csv
+Uncomment views.py
 Run python3 manage.py runserver

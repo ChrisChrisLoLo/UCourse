@@ -2,11 +2,12 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.db.models import Avg, F
-
+#TODO somehow ensure that searchCourse.models is not imported in the case that a db is not initialized.
 from searchCourse.models import *
 from .forms import CourseForm, RatingForm
 DEF_SEARCH_PARAMS = {"sortBy":"name","order":"descending","subject":"all","courseMin":100,"courseMax":1000}
 CRITERION_NUM = 4
+
 
 def index(request):
     
