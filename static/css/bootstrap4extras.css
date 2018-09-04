@@ -1,1 +1,15 @@
+/*Add padding to the top of a div*/
 .top-buffer { padding-top:20px; }
+
+/*Make element sticky*/
+.sticky {
+    position: relative;
+
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    position: sticky;
+
+    top: 0;
+}
