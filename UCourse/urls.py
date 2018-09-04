@@ -22,8 +22,9 @@ urlpatterns = [
     path('search/',include('searchCourse.urls')),
     path('accounts/',include('django.contrib.auth.urls')),
     path('accounts/',include('accounts.urls')),
-    #path('accounts/sign_up',),
+    path('auth/', include('social_django.urls', namespace='social')),
     #path('forums/',include('forums.urls')),
+
     path('admin/', admin.site.urls),
     
 ]
