@@ -35,8 +35,8 @@
                             {{request.user.username}}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/accounts/user">Account</a>
-                            <div class="dropdown-divider"></div>
+                            <!-- <a class="dropdown-item" href="/accounts/user">Account</a>
+                            <div class="dropdown-divider"></div> -->
                             <a class="dropdown-item" href="/accounts/logout">Logout</a>
                         </div>
                     </li>
@@ -49,10 +49,12 @@
 
     <div id="content">{% block content %}{% endblock %}</div>
 
-    <div id="footer" class="footer">
-        {% block footer %}
-            <p>&copy; Floppyright 2018 by <a href="http://www.github.com/ChrisChrisLoLo">Chris Lo</a></p>
-        {% endblock %}
+    <div id="footer" class="container-fluid footer bg-secondary text-light" style="height:100px">
+        <div class="row">
+            {% block footer %}
+                <h5>&copy; Floppyright 2018 by <a href="http://www.github.com/ChrisChrisLoLo">Chris Lo</a></h5>
+            {% endblock %}
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
