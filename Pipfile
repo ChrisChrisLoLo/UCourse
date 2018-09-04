@@ -9,6 +9,7 @@ name = "pypi"
 django = "*"
 "django-bootstrap4" = "*"
 social-auth-app-django = "*"
+django-dotenv = "*"
 
 [requires]
 python_version = "3.6"
