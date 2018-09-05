@@ -76,6 +76,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'UCourse.wsgi.application'
 
+ALLOWED_HOSTS=['173.230.150.142']
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
