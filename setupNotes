@@ -1,5 +1,6 @@
 Use pipenv to install all required packages.
 Comment out the imports and urls in searchCourse/urls.py
+Get api keys for the 'env' file, fill the 'env' file out, and turn file name into '.env'
 Run python3 manage.py migrate
 Run python3 manage.py import_course_csv
 Uncomment urls.py
