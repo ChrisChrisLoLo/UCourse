@@ -1,0 +1,4 @@
+django == 2.1.1
+django-bootstrap4 >= 0.0.7
+social-auth-app-django >= 2.1.0 
+django-dotenv >= 1.4.2
