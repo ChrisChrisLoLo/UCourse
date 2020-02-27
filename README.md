@@ -1,6 +1,8 @@
 # UCourse
 An unofficial University of Alberta web app that both contains course listings offered by the UofA, and also allows users to rate courses based on a set of criteria.
-http://www.picopigeon.com
+~~http://www.picopigeon.com~~
+
+Note: This site is now no longer being hosted. A new, React based application can be found at https://ucourseplus.com/.
 
 # Features
 Search - Search for any classes offered by the UofA based on a set of criteria. Filter courses based on your preferences or directly search for a course.
